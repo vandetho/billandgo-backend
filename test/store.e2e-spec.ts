@@ -1,16 +1,16 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { imports } from './constants';
 import { HttpStatus, INestApplication } from '@nestjs/common';
 import * as request from 'supertest';
 import { faker } from '@faker-js/faker';
 import { CreateStoreDto } from '@/billandgo/store/dto/create-store.dto';
+import { AppModule } from '@/billandgo/app.module';
 
 describe('StoreController (e2e)', () => {
     let app: INestApplication;
 
     beforeEach(async () => {
         const moduleFixture: TestingModule = await Test.createTestingModule({
-            imports,
+            imports: [AppModule],
         }).compile();
 
         app = moduleFixture.createNestApplication();
@@ -31,6 +31,7 @@ describe('StoreController (e2e)', () => {
             .send(store)
             .expect(HttpStatus.CREATED)
             .expect(({ body }) => {
+                console.log({ body });
                 expect(body.id).toBeDefined();
                 storeId = body.id;
                 expect(body.name).toBe(store.name);

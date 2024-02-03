@@ -1,7 +1,9 @@
-import 'dotenv/config';
+import * as dotenv from 'dotenv';
 import { MongooseModule } from '@nestjs/mongoose';
 import { StoreModule } from '@/billandgo/store/store.module';
 
-export const database = process.env.MONGO_URI_DEV;
+dotenv.config({ path: ['.env.test', '.env.test.local', '.env.local', '.env'] });
+
+export const database = process.env.MONGO_URI;
 
 export const imports = [MongooseModule.forRoot(database), StoreModule];
