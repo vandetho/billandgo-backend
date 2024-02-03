@@ -1,5 +1,6 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { HydratedDocument } from 'mongoose';
+import { ApiProperty } from '@nestjs/swagger';
 
 export type StoreDocument = HydratedDocument<Store>;
 
@@ -14,6 +15,10 @@ export type StoreDocument = HydratedDocument<Store>;
     },
 })
 export class Store {
+    @ApiProperty()
+    id: string;
+
+    @ApiProperty()
     @Prop()
     name: string;
 }
