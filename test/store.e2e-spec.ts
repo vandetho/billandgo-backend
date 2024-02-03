@@ -31,7 +31,6 @@ describe('StoreController (e2e)', () => {
             .send(store)
             .expect(HttpStatus.CREATED)
             .expect(({ body }) => {
-                console.log({ body });
                 expect(body.id).toBeDefined();
                 storeId = body.id;
                 expect(body.name).toBe(store.name);
@@ -45,6 +44,18 @@ describe('StoreController (e2e)', () => {
             .expect(({ body }) => {
                 expect(body.id).toBe(storeId);
                 expect(body.name).toBe(store.name);
+            });
+    });
+
+    const newName = faker.company.name();
+    it('/api/stores/:storeId (PUT) 200 OK', () => {
+        return request(app.getHttpServer())
+            .put(`/api/stores/${storeId}`)
+            .send({ name: newName })
+            .expect(HttpStatus.OK)
+            .expect(({ body }) => {
+                expect(body.id).toBe(storeId);
+                expect(body.name).toBe(newName);
             });
     });
 });

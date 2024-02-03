@@ -1,4 +1,4 @@
-import { transports, format } from 'winston';
+import { format, transports } from 'winston';
 import { utilities, WinstonModuleOptions, WinstonModule } from 'nest-winston';
 import { LoggerService } from '@nestjs/common';
 import 'winston-daily-rotate-file';
