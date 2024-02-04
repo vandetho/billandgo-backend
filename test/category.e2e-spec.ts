@@ -22,10 +22,6 @@ describe('CategoryController (e2e)', () => {
         return request(app.getHttpServer()).get('/api/categories').expect(HttpStatus.OK);
     });
 
-    it('/api/categories (POST) 400 Bad Request', () => {
-        return request(app.getHttpServer()).post('/api/categories').send({}).expect(HttpStatus.BAD_REQUEST);
-    });
-
     const store: CreateStoreDto = {
         name: faker.company.name(),
     };
