@@ -2,6 +2,7 @@ import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import mongoose, { HydratedDocument } from 'mongoose';
 import { StoreDocument } from '@/billandgo/store/schema/store.schema';
 import { ApiProperty } from '@nestjs/swagger';
+import { CategoryDocument } from '@/billandgo/category/schema/category.schema';
 
 export type ProductDocument = HydratedDocument<Product>;
 
@@ -27,6 +28,9 @@ export class Product {
 
     @Prop()
     description: string;
+
+    @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'Category', required: true })
+    category: CategoryDocument;
 
     @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'Store', required: true })
     store: StoreDocument;
